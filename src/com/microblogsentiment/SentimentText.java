@@ -27,8 +27,11 @@ public class SentimentText {
 		
 		//读取干扰标签微博
 		List<Microblog> noisemicroblogs = new ArrayList<Microblog>();
-		unlabeledmicroblogs.addAll(WordSegmentation
+		noisemicroblogs.addAll(WordSegmentation
 				.readNoiseMicroblogs("corpus/noise.txt"));
+		
+		System.out.println(labeledmicroblogs.size()+" "+unlabeledmicroblogs.size()
+				+" "+noisemicroblogs.size());
 		
 		// 感情词典的建立
 		EmotionDictionary dictionary = new EmotionDictionary();
@@ -62,6 +65,9 @@ public class SentimentText {
 		inputmicroblogs.addAll(unlabeledmicroblogs);
 		inputmicroblogs.addAll(noisemicroblogs);
 		WordSegmentation.WriteVectorToText(inputmicroblogs,"file/microbloginput.txt");
+		
+		System.out.println(labeledmicroblogs.size()+" "+unlabeledmicroblogs.size()
+				+" "+noisemicroblogs.size());
 		
 		//提取基于词典的情感特征并保存(三个部分三个文件，知道各个部分有多少微博，标记微博前1003条是正感情)
 		WordSegmentation.TurnVectorToSentimentFeature(labeledmicroblogs, "file/sentimentfeatures_an.txt");
